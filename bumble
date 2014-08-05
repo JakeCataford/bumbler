@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby -w
+
+require 'pty'
+
+PTY.spawn("bundle #{ARGV.join(" ")}") do |stdout, stdin, pid|
+  stdout.each {|line| puts "🐝  #{line}"}
+end
