@@ -1,7 +1,37 @@
 #!/usr/bin/env ruby -w
 
-require 'pty'
+require 'open3'
 
-PTY.spawn("bundle #{ARGV.join(" ")}") do |stdout, stdin, pid|
-  stdout.each {|line| puts "🐝  #{line}"}
+PROTIPS = [
+  "Bumbles bounce!",
+  "Nuke the whales.",
+  "Bambum bum bum bum",
+  "Node.js is a performant solution to the problem you are solving.",
+  "Don't stop, never give up. Hold your head high and reach the top.",
+  "Tupac is not dead.",
+  "bzzz bzzzz",
+  "Please remember to BEE BUZZZY!",
+  "Emoji are totally acceptable as variable names in unicode languages.",
+  "Sharks.",
+  "More like, utf-great!",
+  "The two hardest problems in computer science is cache invalidation and when to get food.",
+  "Doing ten jumping jacks will make you look like an idiot."
+]
+
+puts "🐝 🐝 🐝  PROTIP: #{PROTIPS.sample}"
+
+Open3.popen3("bundle #{ARGV.join(" ")}") do |stdin, stdout, stderr|
+  threads = []
+  threads << Thread.new(stderr) do |terr|
+    while (line = terr.gets)
+      puts "💣  #{line}"
+    end
+  end
+  threads << Thread.new(stdout) do |terr|
+    while (line = terr.gets)
+      puts "🐝  #{line}"
+    end
+  end
+
+  threads.each{|t| t.join()}
 end
