@@ -1,4 +1,5 @@
-Bumbler :bee:
+:bee:
+======
 The next level wrapper for bundler
 ======
 
@@ -16,3 +17,12 @@ Beng beng, now you can `bumble` instead of `bundle`.
 >
 > Boneyard John
 
+
+- 2x SCALABILITY BENEFIT
+===========
+
+- INCREASES SYNERGY
+----------
+
+- GAIN MORALE
+======
